@@ -64,7 +64,6 @@ const appSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchTickets.fulfilled, (state, action) => {
-        state.searchCounter = 5;
         state.tickets = [...state.tickets, ...action.payload.tickets];
         state.stop = action.payload.stop;
         state.loading = false;
