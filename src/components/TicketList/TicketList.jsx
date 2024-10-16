@@ -28,7 +28,7 @@ const TicketList = ({ changeSearchCounter }) => {
     dispatch(fetchSearchId());
   }, [dispatch]);
   useEffect(() => {
-    if (!stop) {
+    if (!stop && searchId) {
       dispatch(fetchTickets(searchId));
     }
   }, [searchId, stop, tickets]);
@@ -69,7 +69,7 @@ const TicketList = ({ changeSearchCounter }) => {
 
   return (
     <div className={classes.ticketList}>
-      {error && (
+      {error && !loading && (
         <Offline>
           <Alert type="error" message="Проверьте подключение к сети"></Alert>
         </Offline>
