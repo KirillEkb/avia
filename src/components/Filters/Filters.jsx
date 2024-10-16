@@ -1,43 +1,37 @@
+import { connect } from 'react-redux';
+
+import { changeFilter } from '../../store/reducer';
+
 import classes from './Filters.module.scss';
 
-const Filter = () => {
+const Filter = ({ filter, changeFilter }) => {
+  const filterList = ['Все', 'Без пересадок', '1 пересадка', '2 пересадки', '3 пересадки'].map((item) => {
+    return (
+      <li key={item} className={classes.filter}>
+        <label className={classes.filter__label}>
+          <input
+            className={classes.standardCheckBox}
+            type="checkbox"
+            checked={filter.includes(item)}
+            onChange={() => {
+              changeFilter(item);
+            }}
+          />
+          <span className={classes.checkbox} /> {item}
+        </label>
+      </li>
+    );
+  });
   return (
     <div className={classes.filters}>
       <h3 className={classes.title}>КОЛИЧЕСТВО ПЕРЕСАДОК</h3>
-      <ul className={classes.list}>
-        <li className={classes.filter}>
-          <label className={classes.filter__label}>
-            <input className={classes.standardCheckBox} type="checkbox" />
-            <span className={classes.checkbox} /> Все
-          </label>
-        </li>
-        <li className={classes.filter}>
-          <label className={classes.filter__label}>
-            <input className={classes.standardCheckBox} type="checkbox" />
-            <span className={classes.checkbox} /> Без пересадок
-          </label>
-        </li>
-        <li className={classes.filter}>
-          <label className={classes.filter__label}>
-            <input className={classes.standardCheckBox} type="checkbox" />
-            <span className={classes.checkbox} /> 1 пересадка
-          </label>
-        </li>
-        <li className={classes.filter}>
-          <label className={classes.filter__label}>
-            <input className={classes.standardCheckBox} type="checkbox" />
-            <span className={classes.checkbox} /> 2 пересадки
-          </label>
-        </li>
-        <li className={classes.filter}>
-          <label className={classes.filter__label}>
-            <input className={classes.standardCheckBox} type="checkbox" />
-            <span className={classes.checkbox} /> 3 пересадки
-          </label>
-        </li>
-      </ul>
+      <ul className={classes.list}>{filterList}</ul>
     </div>
   );
 };
-
-export default Filter;
+const mapStateToProps = (state) => {
+  return {
+    filter: state.app.filter,
+  };
+};
+export default connect(mapStateToProps, { changeFilter })(Filter);

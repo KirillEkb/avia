@@ -1,29 +1,27 @@
+@import '../../variable.module.scss';
 .button {
     flex: 1;
-    background-color: #fff;
+    background-color: $white;
     padding: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-family: Open Sans;
     font-size: 12px;
     line-height: 20px;
     letter-spacing: 0.5px;
     text-align: center;
     &:hover {
-      background-color: #007bff;
-      color: #fff;
+      background-color: $buttonHover;
+      color: $white;
     }
   }
 
   .active {
-    background-color: #007bff;
+    background-color: $mainColor;
     border-radius: 5px;
-    border: 1px solid #007bff;
-    color: #fff;
+    color: $white;
     cursor: pointer;
     text-align: center;
-    margin-top: 20px;
     width: 100%;
 }
 

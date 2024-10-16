@@ -1,7 +1,8 @@
+@import '../../variable.module.scss';
 .tabs {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
-    border: 1px solid #DFE5EC;
+    border: $tabsBorder;
     border-radius: 5px;
 }
