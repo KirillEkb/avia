@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/static/css/main.316ebea5.css",
+    "main.js": "/static/js/main.07d36a76.js",
+    "static/media/OpenSans-Regular.ttf": "/static/media/OpenSans-Regular.b8cc747a58ffa52b7ff9.ttf",
+    "index.html": "/index.html",
+    "static/media/checked.svg": "/static/media/checked.0165e6c8bb3fed199ab3.svg",
+    "main.316ebea5.css.map": "/static/css/main.316ebea5.css.map",
+    "main.07d36a76.js.map": "/static/js/main.07d36a76.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.316ebea5.css",
+    "static/js/main.07d36a76.js"
+  ]
+}
