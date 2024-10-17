@@ -6,7 +6,10 @@ export const fetchSearchId = createAsyncThunk('tickets/fetchSearchId', async () 
   return data.searchId;
 });
 
-export const fetchTickets = createAsyncThunk('tickets/fetchTickets', async (searchId, { rejectWithValue }) => {
+export const fetchTickets = createAsyncThunk('tickets/fetchTickets', async ([searchId, stop], { rejectWithValue }) => {
+  if (!searchId) {
+    return;
+  }
   const fetchWithRetry = async (searchId) => {
     try {
       const response = await fetch(`${baseUrl}/tickets?searchId=${searchId}`);
@@ -26,5 +29,5 @@ export const fetchTickets = createAsyncThunk('tickets/fetchTickets', async (sear
     }
   };
 
-  return await fetchWithRetry(searchId);
+  if (!stop) return await fetchWithRetry(searchId);
 });

@@ -11,16 +11,13 @@ const appSlice = createSlice({
     searchId: null,
     loading: false,
     error: null,
-    searchCounter: 5,
     stop: false,
   },
   reducers: {
     changeTabs: (state, action) => {
       state.tabs = action.payload;
-      state.searchCounter = 5;
     },
     changeFilter: (state, action) => {
-      state.searchCounter = 5;
       switch (action.payload) {
         case 'Все':
           state.filter = state.filter.includes('Все')
@@ -40,9 +37,6 @@ const appSlice = createSlice({
         default:
           break;
       }
-    },
-    changeSearchCounter: (state, action) => {
-      state.searchCounter = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -64,9 +58,12 @@ const appSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchTickets.fulfilled, (state, action) => {
-        state.tickets = [...state.tickets, ...action.payload.tickets];
-        state.stop = action.payload.stop;
-        state.loading = false;
+        if (!state.searchId) return;
+        if (action.payload.tickets.length) {
+          state.tickets = [...state.tickets, ...action.payload.tickets];
+          state.stop = action.payload.stop;
+          state.loading = false;
+        }
       })
       .addCase(fetchTickets.rejected, (state, action) => {
         state.error = action.payload;
@@ -75,5 +72,5 @@ const appSlice = createSlice({
   },
 });
 
-export const { changeTabs, changeFilter, changeSearchCounter } = appSlice.actions;
+export const { changeTabs, changeFilter } = appSlice.actions;
 export default appSlice.reducer;
