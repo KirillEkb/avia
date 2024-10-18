@@ -11,7 +11,6 @@ const appSlice = createSlice({
     searchId: null,
     loading: false,
     error: null,
-    stop: false,
   },
   reducers: {
     changeTabs: (state, action) => {
@@ -57,13 +56,9 @@ const appSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchTickets.fulfilled, (state, action) => {
-        if (!state.searchId) return;
-        if (action.payload.tickets.length) {
-          state.tickets = [...state.tickets, ...action.payload.tickets];
-          state.stop = action.payload.stop;
-          state.loading = false;
-        }
+      .addCase('tickets/fetchTicketsSuccess', (state, action) => {
+        state.tickets = [...state.tickets, ...action.payload.tickets];
+        state.loading = false;
       })
       .addCase(fetchTickets.rejected, (state, action) => {
         state.error = action.payload;
